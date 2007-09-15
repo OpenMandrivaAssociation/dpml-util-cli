@@ -5,7 +5,7 @@
 
 Name:           dpml-%{category}-%{short_name}
 Version:        1.0.0
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        DPML Metro Common Utilities
 License:        Apache License
@@ -16,8 +16,6 @@ Source0:        %{name}-%{version}.tar.bz2
 Source1:        %{name}-build.xml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %if %{gcj_support}
-Requires(post): java-gcj-compat
-Requires(postun): java-gcj-compat
 BuildRequires:  java-gcj-compat-devel
 %else
 BuildArch:      noarch
