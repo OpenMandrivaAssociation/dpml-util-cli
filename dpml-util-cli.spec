@@ -5,7 +5,7 @@
 
 Name:           dpml-%{category}-%{short_name}
 Version:        1.0.0
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 Summary:        DPML Metro Common Utilities
 License:        Apache License
@@ -23,7 +23,7 @@ BuildArch:      noarch
 BuildRequires:  ant >= 0:1.6
 #BuildRequires: ant-junit >= 0:1.6
 #BuildRequires: junit
-BuildRequires:  jpackage-utils >= 0:1.5
+BuildRequires:  java-rpmbuild >= 0:1.5
 
 %description
 The CLI index provides an API for processing command line interfaces.
