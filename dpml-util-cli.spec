@@ -14,6 +14,7 @@ URL:            http://dpml.net/util/cli/index.html
 # svn checkout https://svn.berlios.de/svnroot/repos/dpml/trunk/main
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        %{name}-build.xml
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
 %else
