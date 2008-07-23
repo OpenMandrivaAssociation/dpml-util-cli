@@ -5,7 +5,7 @@
 
 Name:           dpml-%{category}-%{short_name}
 Version:        1.0.0
-Release:        %mkrel 4
+Release:        %mkrel 6
 Epoch:          0
 Summary:        DPML Metro Common Utilities
 License:        Apache License
