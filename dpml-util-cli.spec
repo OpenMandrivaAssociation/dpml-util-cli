@@ -5,7 +5,7 @@
 
 Name:           dpml-%{category}-%{short_name}
 Version:        1.0.0
-Release:        %mkrel 8
+Release:        9
 Epoch:          0
 Summary:        DPML Metro Common Utilities
 License:        Apache License
@@ -14,7 +14,6 @@ URL:            http://dpml.net/util/cli/index.html
 # svn checkout https://svn.berlios.de/svnroot/repos/dpml/trunk/main
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        %{name}-build.xml
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
 %else
@@ -70,8 +69,6 @@ export CLASSPATH=
 %ant jar javadoc #test
 
 %install
-%{__rm} -rf %{buildroot}
-
 # jars
 %{__mkdir_p} %{buildroot}%{_javadir}
 %{__cp} -a build/%{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
@@ -79,15 +76,12 @@ export CLASSPATH=
 
 # javadoc
 %{__mkdir_p} %{buildroot}%{_javadocdir}/%{name}-%{version}
-%{__cp} -a build/javadoc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr build/javadoc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 %{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/%{name} # ghost symlink
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
 %endif
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %if %{gcj_support}
 %post
@@ -119,4 +113,40 @@ fi
 %doc %{_javadocdir}/%{name}-%{version}
 %ghost %doc %{_javadocdir}/%{name}
 
+
+
+
+%changelog
+* Thu Dec 09 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.0.0-8mdv2011.0
++ Revision: 617875
+- the mass rebuild of 2010.0 packages
+
+* Thu Sep 03 2009 Thierry Vignaud <tv@mandriva.org> 0:1.0.0-7mdv2010.0
++ Revision: 428333
+- rebuild
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 0:1.0.0-6mdv2009.0
++ Revision: 244524
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Sun Dec 16 2007 Anssi Hannula <anssi@mandriva.org> 0:1.0.0-4mdv2008.1
++ Revision: 120864
+- buildrequire java-rpmbuild, i.e. build with icedtea on x86(_64)
+
+* Sat Sep 15 2007 Anssi Hannula <anssi@mandriva.org> 0:1.0.0-3mdv2008.0
++ Revision: 87337
+- rebuild to filter out autorequires of GCJ AOT objects
+- remove unnecessary Requires(post) on java-gcj-compat
+
+* Sun Sep 09 2007 Pascal Terjan <pterjan@mandriva.org> 0:1.0.0-2mdv2008.0
++ Revision: 82773
+- rebuild
+
+
+* Fri Aug 11 2006 David Walluck <walluck@mandriva.org> 0:1.0.0-1mdv2007.1
+- release
 

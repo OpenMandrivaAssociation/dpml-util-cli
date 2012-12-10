@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="dpml-util-cli" default="all" basedir=".">
+  <description>The CLI index provides an API for processing command line interfaces.</description>
+  <property name="build" value="${basedir}/build" />
+  <property name="javadoc" value="${build}/javadoc" />
+  <property name="src" value="${basedir}/src/main" />
+  <property name="test" value="${basedir}/src/test" />
+  <property name="build.compiler" value="modern" />
+  <property name="options.optimize" value="on" />
+  <property name="options.deprecation" value="on" />
+  <property name="options.debug" value="on" />
+  <target name="all" depends="jar,javadoc,test"
+   description="Build jar, execute tests, and build javadocs" /> 
+  <target name="init">
+    <mkdir dir="${build}" /> 
+  </target>
+  <target name="jar" depends="compile" description="Build jar">
+    <jar destfile="${build}/dpml-util-cli.jar" index="true">
+      <fileset dir="${build}">
+        <include name="net/**/*.class" />
+      </fileset>
+      <fileset dir="${src}">
+        <include name="net/dpml/cli/resource/CLIMessageBundle_en_US.properties" />
+      </fileset>
+    </jar>
+  </target>
+  <target name="compile" depends="init" description="Compile source code">
+    <javac srcdir="${src}" debug="${options.debug}"
+     deprecation="${options.deprecation}" optimize="${options.optimize}"
+     destdir="${build}">
+    </javac>
+  </target>
+  <target name="compile-tests" depends="init" description="Compile test source code">
+    <javac srcdir="${test}" debug="${options.debug}"
+     deprecation="${options.deprecation}" optimize="${options.optimize}"
+     destdir="${build}">
+    </javac>
+  </target>
+  <target name="javadoc" description="Build javadocs">
+    <mkdir dir="${javadoc}" />
+    <javadoc sourcepath="${src}" destdir="${javadoc}" use="true" version="true"
+     author="true" linksource="true" encoding="utf8" docencoding="utf8">
+      <packageset dir="${src}">
+        <include name="net/**" />
+      </packageset>
+    </javadoc>
+  </target>
+  <target name="clean" description="Clean build">
+    <delete dir="${build}" />
+  </target>
+  <target name="test" depends="compile,compile-tests" description="Execute tests">
+    <junit haltonfailure="yes" printsummary="yes" showoutput="yes"
+     fork="yes" forkmode="once">
+      <classpath>
+        <pathelement path="${build}" />
+      </classpath>
+      <formatter type="xml" usefile="true" />
+      <batchtest todir="${build}">
+        <fileset dir="${test}">
+          <include name="**/*Test*.java" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+</project>
