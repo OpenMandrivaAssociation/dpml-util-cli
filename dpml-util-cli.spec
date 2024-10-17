@@ -10,7 +10,7 @@ Epoch:          0
 Summary:        DPML Metro Common Utilities
 License:        Apache License
 Group:          Development/Java
-URL:            http://dpml.net/util/cli/index.html
+URL:            https://dpml.net/util/cli/index.html
 # svn checkout https://svn.berlios.de/svnroot/repos/dpml/trunk/main
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        %{name}-build.xml
